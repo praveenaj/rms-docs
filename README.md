@@ -25,6 +25,8 @@ headingLevel: 2
 
 The RMS REST API provides a comprehensive interface for seamless data exchange with the RMS property management system. This API allows you to extract information, update existing data, and create new records directly in the RMS database.
 
+This documenation is based on the [Official documentation](https://restapidocs.rmscloud.com) by RMS.
+
 ## Documentation Structure
 
 This repository contains comprehensive documentation for the RMS REST API:
