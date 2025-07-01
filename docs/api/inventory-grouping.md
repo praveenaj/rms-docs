@@ -1,39 +1,42 @@
-<h1 id="rms-rest-api-vip-codes">VIP codes</h1>
+<h1 id="rms-rest-api-inventory-grouping">inventory grouping</h1>
 
-Retrieve a list of VIP Codes
+## postInventoryGroupingsSearch
 
-## getVIPCodes
-
-<a id="opIdgetVIPCodes"></a>
+<a id="opIdpostInventoryGroupingsSearch"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://restapi8.rmscloud.com/VIPCodes \
+curl -X POST https://restapi8.rmscloud.com/inventoryGroupings/Search \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'authtoken: API_KEY'
 
 ```
 
 ```http
-GET https://restapi8.rmscloud.com/VIPCodes HTTP/1.1
+POST https://restapi8.rmscloud.com/inventoryGroupings/Search HTTP/1.1
 Host: restapi8.rmscloud.com
+Content-Type: application/json
 Accept: application/json
 
 ```
 
 ```javascript
-
+const inputBody = '{
+  "propertyId": 3
+}';
 const headers = {
+  'Content-Type':'application/json',
   'Accept':'application/json',
   'authtoken':'API_KEY'
 };
 
-fetch('https://restapi8.rmscloud.com/VIPCodes',
+fetch('https://restapi8.rmscloud.com/inventoryGroupings/Search',
 {
-  method: 'GET',
-
+  method: 'POST',
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -49,11 +52,12 @@ require 'rest-client'
 require 'json'
 
 headers = {
+  'Content-Type' => 'application/json',
   'Accept' => 'application/json',
   'authtoken' => 'API_KEY'
 }
 
-result = RestClient.get 'https://restapi8.rmscloud.com/VIPCodes',
+result = RestClient.post 'https://restapi8.rmscloud.com/inventoryGroupings/Search',
   params: {
   }, headers: headers
 
@@ -64,11 +68,12 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json',
   'authtoken': 'API_KEY'
 }
 
-r = requests.get('https://restapi8.rmscloud.com/VIPCodes', headers = headers)
+r = requests.post('https://restapi8.rmscloud.com/inventoryGroupings/Search', headers = headers)
 
 print(r.json())
 
@@ -80,6 +85,7 @@ print(r.json())
 require 'vendor/autoload.php';
 
 $headers = array(
+    'Content-Type' => 'application/json',
     'Accept' => 'application/json',
     'authtoken' => 'API_KEY',
 );
@@ -90,7 +96,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://restapi8.rmscloud.com/VIPCodes', array(
+    $response = $client->request('POST','https://restapi8.rmscloud.com/inventoryGroupings/Search', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -107,9 +113,9 @@ try {
 ```
 
 ```java
-URL obj = new URL("https://restapi8.rmscloud.com/VIPCodes");
+URL obj = new URL("https://restapi8.rmscloud.com/inventoryGroupings/Search");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
+con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
 BufferedReader in = new BufferedReader(
     new InputStreamReader(con.getInputStream()));
@@ -134,12 +140,13 @@ import (
 func main() {
 
     headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
         "authtoken": []string{"API_KEY"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/VIPCodes", data)
+    req, err := http.NewRequest("POST", "https://restapi8.rmscloud.com/inventoryGroupings/Search", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -149,16 +156,23 @@ func main() {
 
 ```
 
-`GET /VIPCodes`
+`POST /inventoryGroupings/Search`
 
-*Retrieve a list of VIP Codes*
+*Retrieve a list of inventory groupings*
 
-<h3 id="getvipcodes-parameters">Parameters</h3>
+> Body parameter
+
+```json
+{
+  "propertyId": 3
+}
+```
+
+<h3 id="postinventorygroupingssearch-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|limit|query|integer|false|Limit the results to this number of records|
-|offset|query|integer|false|The number of records to skip before returning results|
+|body|body|[inventoryGroupingsSearch](#schemainventorygroupingssearch)|true|Ability to search for Inventory Groupings|
 
 > Example responses
 
@@ -168,30 +182,45 @@ func main() {
 [
   {
     "id": 1,
-    "code": "KC",
-    "description": "KC VIP1",
-    "shortDescription": "KC VIP"
+    "billingCategoryId": 29,
+    "categories": [
+      {
+        "categoryId": 28,
+        "order": 1
+      },
+      {
+        "categoryId": 29,
+        "order": 2
+      }
+    ],
+    "description": "Kings & Queens",
+    "categoryId": 58,
+    "propertyId": 3
   }
 ]
 ```
 
-<h3 id="getvipcodes-responses">Responses</h3>
+<h3 id="postinventorygroupingssearch-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
 
-<h3 id="getvipcodes-responseschema">Response Schema</h3>
+<h3 id="postinventorygroupingssearch-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[[VIPcodes](#schemavipcodes)]|false|none|none|
+|*anonymous*|[[inventoryGroupings](#schemainventorygroupings)]|false|none|none|
 |» id|integer(int32)|false|none|none|
-|» code|string|false|none|none|
+|» billingCategoryId|integer(int32)|false|none|none|
+|» categories|[[inventoryGroupingsCategories](#schemainventorygroupingscategories)]|false|none|none|
+|»» categoryId|integer(int32)|false|none|none|
+|»» order|integer(int32)|false|none|none|
 |» description|string|false|none|none|
-|» shortDescription|string|false|none|none|
+|» categoryId|integer(int32)|false|none|none|
+|» propertyId|integer(int32)|false|none|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

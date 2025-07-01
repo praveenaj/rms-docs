@@ -1,23 +1,25 @@
-<h1 id="rms-rest-api-vip-codes">VIP codes</h1>
+<h1 id="rms-rest-api-mandatory-fields">mandatory fields</h1>
 
-Retrieve a list of VIP Codes
+Retrieve the mandatory fields associated with the guest and reservation objects (This will be configured by the client). Fields setup as Mandatory on Save will require a partner to enter information prior to being able to save changes to new or existing reservations.
 
-## getVIPCodes
+<a href="https://helpcentre.rmscloud.com/field-maintenance-info/field-maintenance-overview">Find out more</a>
 
-<a id="opIdgetVIPCodes"></a>
+## getMandatoryFields
+
+<a id="opIdgetMandatoryFields"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://restapi8.rmscloud.com/VIPCodes \
+curl -X GET https://restapi8.rmscloud.com/mandatoryFields \
   -H 'Accept: application/json' \
   -H 'authtoken: API_KEY'
 
 ```
 
 ```http
-GET https://restapi8.rmscloud.com/VIPCodes HTTP/1.1
+GET https://restapi8.rmscloud.com/mandatoryFields HTTP/1.1
 Host: restapi8.rmscloud.com
 Accept: application/json
 
@@ -30,7 +32,7 @@ const headers = {
   'authtoken':'API_KEY'
 };
 
-fetch('https://restapi8.rmscloud.com/VIPCodes',
+fetch('https://restapi8.rmscloud.com/mandatoryFields',
 {
   method: 'GET',
 
@@ -53,7 +55,7 @@ headers = {
   'authtoken' => 'API_KEY'
 }
 
-result = RestClient.get 'https://restapi8.rmscloud.com/VIPCodes',
+result = RestClient.get 'https://restapi8.rmscloud.com/mandatoryFields',
   params: {
   }, headers: headers
 
@@ -68,7 +70,7 @@ headers = {
   'authtoken': 'API_KEY'
 }
 
-r = requests.get('https://restapi8.rmscloud.com/VIPCodes', headers = headers)
+r = requests.get('https://restapi8.rmscloud.com/mandatoryFields', headers = headers)
 
 print(r.json())
 
@@ -90,7 +92,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://restapi8.rmscloud.com/VIPCodes', array(
+    $response = $client->request('GET','https://restapi8.rmscloud.com/mandatoryFields', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -107,7 +109,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("https://restapi8.rmscloud.com/VIPCodes");
+URL obj = new URL("https://restapi8.rmscloud.com/mandatoryFields");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -139,7 +141,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/VIPCodes", data)
+    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/mandatoryFields", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -149,16 +151,9 @@ func main() {
 
 ```
 
-`GET /VIPCodes`
+`GET /mandatoryFields`
 
-*Retrieve a list of VIP Codes*
-
-<h3 id="getvipcodes-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|limit|query|integer|false|Limit the results to this number of records|
-|offset|query|integer|false|The number of records to skip before returning results|
+*Retrieve the mandatory fields associated with your user profile for a client*
 
 > Example responses
 
@@ -166,32 +161,47 @@ func main() {
 
 ```json
 [
-  {
-    "id": 1,
-    "code": "KC",
-    "description": "KC VIP1",
-    "shortDescription": "KC VIP"
-  }
+  [
+    {
+      "entity": "Guest",
+      "name": "Given",
+      "onCheckin": false,
+      "onSave": true
+    },
+    {
+      "entity": "Reservation",
+      "name": "Company",
+      "onCheckin": true,
+      "onSave": true
+    }
+  ]
 ]
 ```
 
-<h3 id="getvipcodes-responses">Responses</h3>
+<h3 id="getmandatoryfields-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
 
-<h3 id="getvipcodes-responseschema">Response Schema</h3>
+<h3 id="getmandatoryfields-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[[VIPcodes](#schemavipcodes)]|false|none|none|
-|» id|integer(int32)|false|none|none|
-|» code|string|false|none|none|
-|» description|string|false|none|none|
-|» shortDescription|string|false|none|none|
+|*anonymous*|[[mandatoryField](#schemamandatoryfield)]|false|none|none|
+|» entity|string|false|none|none|
+|» name|string|false|none|none|
+|» onCheckin|boolean|false|none|none|
+|» onSave|boolean|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|entity|Guest|
+|entity|Reservation|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

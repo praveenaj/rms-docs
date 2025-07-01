@@ -1,36 +1,33 @@
-<h1 id="rms-rest-api-vip-codes">VIP codes</h1>
+<h1 id="rms-rest-api-health-check">health check</h1>
 
-Retrieve a list of VIP Codes
+Use the health check endpoint to check the API's health status
 
-## getVIPCodes
+## getHealthCheck
 
-<a id="opIdgetVIPCodes"></a>
+<a id="opIdgetHealthCheck"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://restapi8.rmscloud.com/VIPCodes \
-  -H 'Accept: application/json' \
+curl -X GET https://restapi8.rmscloud.com/healthcheck \
   -H 'authtoken: API_KEY'
 
 ```
 
 ```http
-GET https://restapi8.rmscloud.com/VIPCodes HTTP/1.1
+GET https://restapi8.rmscloud.com/healthcheck HTTP/1.1
 Host: restapi8.rmscloud.com
-Accept: application/json
 
 ```
 
 ```javascript
 
 const headers = {
-  'Accept':'application/json',
   'authtoken':'API_KEY'
 };
 
-fetch('https://restapi8.rmscloud.com/VIPCodes',
+fetch('https://restapi8.rmscloud.com/healthcheck',
 {
   method: 'GET',
 
@@ -49,11 +46,10 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json',
   'authtoken' => 'API_KEY'
 }
 
-result = RestClient.get 'https://restapi8.rmscloud.com/VIPCodes',
+result = RestClient.get 'https://restapi8.rmscloud.com/healthcheck',
   params: {
   }, headers: headers
 
@@ -64,11 +60,10 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json',
   'authtoken': 'API_KEY'
 }
 
-r = requests.get('https://restapi8.rmscloud.com/VIPCodes', headers = headers)
+r = requests.get('https://restapi8.rmscloud.com/healthcheck', headers = headers)
 
 print(r.json())
 
@@ -80,7 +75,6 @@ print(r.json())
 require 'vendor/autoload.php';
 
 $headers = array(
-    'Accept' => 'application/json',
     'authtoken' => 'API_KEY',
 );
 
@@ -90,7 +84,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://restapi8.rmscloud.com/VIPCodes', array(
+    $response = $client->request('GET','https://restapi8.rmscloud.com/healthcheck', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -107,7 +101,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("https://restapi8.rmscloud.com/VIPCodes");
+URL obj = new URL("https://restapi8.rmscloud.com/healthcheck");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -134,12 +128,11 @@ import (
 func main() {
 
     headers := map[string][]string{
-        "Accept": []string{"application/json"},
         "authtoken": []string{"API_KEY"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/VIPCodes", data)
+    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/healthcheck", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -149,49 +142,15 @@ func main() {
 
 ```
 
-`GET /VIPCodes`
+`GET /healthcheck`
 
-*Retrieve a list of VIP Codes*
+*Use the health check endpoint to check the API's health status*
 
-<h3 id="getvipcodes-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|limit|query|integer|false|Limit the results to this number of records|
-|offset|query|integer|false|The number of records to skip before returning results|
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "id": 1,
-    "code": "KC",
-    "description": "KC VIP1",
-    "shortDescription": "KC VIP"
-  }
-]
-```
-
-<h3 id="getvipcodes-responses">Responses</h3>
+<h3 id="gethealthcheck-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
-
-<h3 id="getvipcodes-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[VIPcodes](#schemavipcodes)]|false|none|none|
-|» id|integer(int32)|false|none|none|
-|» code|string|false|none|none|
-|» description|string|false|none|none|
-|» shortDescription|string|false|none|none|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|None|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

@@ -1,23 +1,25 @@
-<h1 id="rms-rest-api-vip-codes">VIP codes</h1>
+<h1 id="rms-rest-api-payment-modes">payment modes</h1>
 
-Retrieve a list of VIP Codes
+A Payment Mode identifies the method of payment on a reservation and determines the Bill To options for each Reservation Account Type.
 
-## getVIPCodes
+<a href="https://helpcentre.rmscloud.com/accounts-recievable-all-setup/payment-mode?">Find out more</a>
 
-<a id="opIdgetVIPCodes"></a>
+## getPaymentModes
+
+<a id="opIdgetPaymentModes"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://restapi8.rmscloud.com/VIPCodes \
+curl -X GET https://restapi8.rmscloud.com/paymentModes \
   -H 'Accept: application/json' \
   -H 'authtoken: API_KEY'
 
 ```
 
 ```http
-GET https://restapi8.rmscloud.com/VIPCodes HTTP/1.1
+GET https://restapi8.rmscloud.com/paymentModes HTTP/1.1
 Host: restapi8.rmscloud.com
 Accept: application/json
 
@@ -30,7 +32,7 @@ const headers = {
   'authtoken':'API_KEY'
 };
 
-fetch('https://restapi8.rmscloud.com/VIPCodes',
+fetch('https://restapi8.rmscloud.com/paymentModes',
 {
   method: 'GET',
 
@@ -53,7 +55,7 @@ headers = {
   'authtoken' => 'API_KEY'
 }
 
-result = RestClient.get 'https://restapi8.rmscloud.com/VIPCodes',
+result = RestClient.get 'https://restapi8.rmscloud.com/paymentModes',
   params: {
   }, headers: headers
 
@@ -68,7 +70,7 @@ headers = {
   'authtoken': 'API_KEY'
 }
 
-r = requests.get('https://restapi8.rmscloud.com/VIPCodes', headers = headers)
+r = requests.get('https://restapi8.rmscloud.com/paymentModes', headers = headers)
 
 print(r.json())
 
@@ -90,7 +92,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://restapi8.rmscloud.com/VIPCodes', array(
+    $response = $client->request('GET','https://restapi8.rmscloud.com/paymentModes', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -107,7 +109,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("https://restapi8.rmscloud.com/VIPCodes");
+URL obj = new URL("https://restapi8.rmscloud.com/paymentModes");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -139,7 +141,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/VIPCodes", data)
+    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/paymentModes", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -149,11 +151,11 @@ func main() {
 
 ```
 
-`GET /VIPCodes`
+`GET /paymentModes`
 
-*Retrieve a list of VIP Codes*
+*Retrieve a list of payment modes*
 
-<h3 id="getvipcodes-parameters">Parameters</h3>
+<h3 id="getpaymentmodes-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -167,31 +169,64 @@ func main() {
 ```json
 [
   {
-    "id": 1,
-    "code": "KC",
-    "description": "KC VIP1",
-    "shortDescription": "KC VIP"
+    "billTo": {
+      "account1": "company",
+      "account2": "client",
+      "phone": "company",
+      "electricty": "company",
+      "gas": "company",
+      "water": "company"
+    },
+    "kiosk": {
+      "payAtArrival": "LocalTaxesOnly",
+      "payAtDeparture": "NoCharge"
+    },
+    "inactive": false,
+    "id": 7,
+    "code": "Accom To Company Pay Own Extras",
+    "description": "GREAT PAYMENT MODE"
   }
 ]
 ```
 
-<h3 id="getvipcodes-responses">Responses</h3>
+<h3 id="getpaymentmodes-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
 
-<h3 id="getvipcodes-responseschema">Response Schema</h3>
+<h3 id="getpaymentmodes-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[[VIPcodes](#schemavipcodes)]|false|none|none|
+|*anonymous*|[[paymentModes](#schemapaymentmodes)]|false|none|none|
+|» billTo|[[paymentModesBillTo](#schemapaymentmodesbillto)]|false|none|none|
+|»» account1|string|false|none|none|
+|»» account2|string|false|none|none|
+|»» phone|string|false|none|none|
+|»» electricty|string|false|none|none|
+|»» gas|string|false|none|none|
+|»» water|string|false|none|none|
+|» kiosk|[[paymentModesKiosk](#schemapaymentmodeskiosk)]|false|none|none|
+|»» payAtArrival|string|false|none|none|
+|»» payAtDeparture|string|false|none|none|
+|» inactive|boolean|false|none|none|
 |» id|integer(int32)|false|none|none|
 |» code|string|false|none|none|
 |» description|string|false|none|none|
-|» shortDescription|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|payAtArrival|NoCharge|
+|payAtArrival|LocalTaxesOnly|
+|payAtArrival|FullRateIncAllTaxes|
+|payAtDeparture|NoCharge|
+|payAtDeparture|AllBalances|
+|payAtDeparture|UseBillTo|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

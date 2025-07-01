@@ -1,23 +1,23 @@
-<h1 id="rms-rest-api-vip-codes">VIP codes</h1>
+<h1 id="rms-rest-api-membership-types">membership types</h1>
 
-Retrieve a list of VIP Codes
+Retrieve a list of membership types
 
-## getVIPCodes
+## getMembershipTypes
 
-<a id="opIdgetVIPCodes"></a>
+<a id="opIdgetMembershipTypes"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://restapi8.rmscloud.com/VIPCodes \
+curl -X GET https://restapi8.rmscloud.com/membershipTypes \
   -H 'Accept: application/json' \
   -H 'authtoken: API_KEY'
 
 ```
 
 ```http
-GET https://restapi8.rmscloud.com/VIPCodes HTTP/1.1
+GET https://restapi8.rmscloud.com/membershipTypes HTTP/1.1
 Host: restapi8.rmscloud.com
 Accept: application/json
 
@@ -30,7 +30,7 @@ const headers = {
   'authtoken':'API_KEY'
 };
 
-fetch('https://restapi8.rmscloud.com/VIPCodes',
+fetch('https://restapi8.rmscloud.com/membershipTypes',
 {
   method: 'GET',
 
@@ -53,7 +53,7 @@ headers = {
   'authtoken' => 'API_KEY'
 }
 
-result = RestClient.get 'https://restapi8.rmscloud.com/VIPCodes',
+result = RestClient.get 'https://restapi8.rmscloud.com/membershipTypes',
   params: {
   }, headers: headers
 
@@ -68,7 +68,7 @@ headers = {
   'authtoken': 'API_KEY'
 }
 
-r = requests.get('https://restapi8.rmscloud.com/VIPCodes', headers = headers)
+r = requests.get('https://restapi8.rmscloud.com/membershipTypes', headers = headers)
 
 print(r.json())
 
@@ -90,7 +90,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://restapi8.rmscloud.com/VIPCodes', array(
+    $response = $client->request('GET','https://restapi8.rmscloud.com/membershipTypes', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -107,7 +107,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("https://restapi8.rmscloud.com/VIPCodes");
+URL obj = new URL("https://restapi8.rmscloud.com/membershipTypes");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -139,7 +139,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/VIPCodes", data)
+    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/membershipTypes", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -149,16 +149,9 @@ func main() {
 
 ```
 
-`GET /VIPCodes`
+`GET /membershipTypes`
 
-*Retrieve a list of VIP Codes*
-
-<h3 id="getvipcodes-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|limit|query|integer|false|Limit the results to this number of records|
-|offset|query|integer|false|The number of records to skip before returning results|
+*Retrieve a list of membership types*
 
 > Example responses
 
@@ -167,31 +160,51 @@ func main() {
 ```json
 [
   {
+    "code": "FF1",
+    "membershipType": "FrequentFlyer",
+    "level1Code": "Bronze",
+    "level2Code": "Silver",
+    "level3Code": "Gold",
+    "level4Code": "Platinum",
+    "level5Code": "Diamond",
+    "level6Code": "BETTER THA",
+    "level7Code": "",
+    "level8Code": "",
+    "level9Code": "",
+    "level10Code": "",
     "id": 1,
-    "code": "KC",
-    "description": "KC VIP1",
-    "shortDescription": "KC VIP"
+    "name": "Frequent Flyer"
   }
 ]
 ```
 
-<h3 id="getvipcodes-responses">Responses</h3>
+<h3 id="getmembershiptypes-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
 
-<h3 id="getvipcodes-responseschema">Response Schema</h3>
+<h3 id="getmembershiptypes-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[[VIPcodes](#schemavipcodes)]|false|none|none|
-|» id|integer(int32)|false|none|none|
+|*anonymous*|[[membershipType](#schemamembershiptype)]|false|none|none|
 |» code|string|false|none|none|
-|» description|string|false|none|none|
-|» shortDescription|string|false|none|none|
+|» membershipType|string|false|none|none|
+|» level1Code|string|false|none|none|
+|» level2Code|string|false|none|none|
+|» level3Code|string|false|none|none|
+|» level4Code|string|false|none|none|
+|» level5Code|string|false|none|none|
+|» level6Code|string|false|none|none|
+|» level7Code|string|false|none|none|
+|» level8Code|string|false|none|none|
+|» level9Code|string|false|none|none|
+|» level10Code|string|false|none|none|
+|» id|integer(int32)|false|none|none|
+|» name|string|false|none|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

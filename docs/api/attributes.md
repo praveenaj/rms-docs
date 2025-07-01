@@ -1,23 +1,25 @@
-<h1 id="rms-rest-api-vip-codes">VIP codes</h1>
+<h1 id="rms-rest-api-attributes">attributes</h1>
 
-Retrieve a list of VIP Codes
+Attributes are features that can be used to filter searches for a Property, Category or Area in RMS and on the RMS IBE
 
-## getVIPCodes
+<a href="https://helpcentre.rmscloud.com/lookup-tables/attributes">Find out more</a>
 
-<a id="opIdgetVIPCodes"></a>
+## getAttributes
+
+<a id="opIdgetAttributes"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://restapi8.rmscloud.com/VIPCodes \
+curl -X GET https://restapi8.rmscloud.com/attributes \
   -H 'Accept: application/json' \
   -H 'authtoken: API_KEY'
 
 ```
 
 ```http
-GET https://restapi8.rmscloud.com/VIPCodes HTTP/1.1
+GET https://restapi8.rmscloud.com/attributes HTTP/1.1
 Host: restapi8.rmscloud.com
 Accept: application/json
 
@@ -30,7 +32,7 @@ const headers = {
   'authtoken':'API_KEY'
 };
 
-fetch('https://restapi8.rmscloud.com/VIPCodes',
+fetch('https://restapi8.rmscloud.com/attributes',
 {
   method: 'GET',
 
@@ -53,7 +55,7 @@ headers = {
   'authtoken' => 'API_KEY'
 }
 
-result = RestClient.get 'https://restapi8.rmscloud.com/VIPCodes',
+result = RestClient.get 'https://restapi8.rmscloud.com/attributes',
   params: {
   }, headers: headers
 
@@ -68,7 +70,7 @@ headers = {
   'authtoken': 'API_KEY'
 }
 
-r = requests.get('https://restapi8.rmscloud.com/VIPCodes', headers = headers)
+r = requests.get('https://restapi8.rmscloud.com/attributes', headers = headers)
 
 print(r.json())
 
@@ -90,7 +92,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','https://restapi8.rmscloud.com/VIPCodes', array(
+    $response = $client->request('GET','https://restapi8.rmscloud.com/attributes', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -107,7 +109,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("https://restapi8.rmscloud.com/VIPCodes");
+URL obj = new URL("https://restapi8.rmscloud.com/attributes");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -139,7 +141,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/VIPCodes", data)
+    req, err := http.NewRequest("GET", "https://restapi8.rmscloud.com/attributes", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -149,16 +151,25 @@ func main() {
 
 ```
 
-`GET /VIPCodes`
+`GET /attributes`
 
-*Retrieve a list of VIP Codes*
+*Retrieve a list of all attributes*
 
-<h3 id="getvipcodes-parameters">Parameters</h3>
+<h3 id="getattributes-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|limit|query|integer|false|Limit the results to this number of records|
-|offset|query|integer|false|The number of records to skip before returning results|
+|associatedTo|query|string|false|Only these asscociations will be accepted|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|associatedTo|all|
+|associatedTo|area|
+|associatedTo|property|
+|associatedTo|category|
+|associatedTo|dwelling|
 
 > Example responses
 
@@ -167,31 +178,31 @@ func main() {
 ```json
 [
   {
+    "associatedTo": "Property",
+    "availableToIbe": true,
     "id": 1,
-    "code": "KC",
-    "description": "KC VIP1",
-    "shortDescription": "KC VIP"
+    "name": "Minibar"
   }
 ]
 ```
 
-<h3 id="getvipcodes-responses">Responses</h3>
+<h3 id="getattributes-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
 
-<h3 id="getvipcodes-responseschema">Response Schema</h3>
+<h3 id="getattributes-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|*anonymous*|[[VIPcodes](#schemavipcodes)]|false|none|none|
+|*anonymous*|[[attributeFull](#schemaattributefull)]|false|none|[Used:<br>GET /areas/{id}/attributes<br>GET /attributes<br>GET /categories/{id}/attributes<br>GET /properties/{id}/attributes<br>]|
+|» associatedTo|string|false|none|none|
+|» availableToIbe|boolean|false|none|Only Applies to Property and category attributes|
 |» id|integer(int32)|false|none|none|
-|» code|string|false|none|none|
-|» description|string|false|none|none|
-|» shortDescription|string|false|none|none|
+|» name|string|false|none|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
