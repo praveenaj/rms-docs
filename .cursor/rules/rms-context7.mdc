@@ -1,9 +1,4 @@
 ---
-description:
-globs:
-alwaysApply: false
----
----
 description: Always use Context7 MCP with library ID "/praveenaj/rms-docs-md" for RMS API prompts
 globs: ["**/*"]
 alwaysApply: false
